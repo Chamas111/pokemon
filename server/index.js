@@ -14,15 +14,6 @@ app.use(express.json());
 app.use("/api/pokemons", pokemonsRouter);
 app.use("/api/extpokemons", pokemonsExternalRouter);
 
-if (process.env.NODE_ENV === "production") {
-  const buildpath = path.join(__dirname, "../client/build");
-  app.use(express.static(buildpath));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(buildpath, "index.html"));
-  });
-}
-
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server is runing on port ${PORT}`);
