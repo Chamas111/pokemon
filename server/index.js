@@ -14,8 +14,12 @@ app.use(express.json());
 app.use("/api/pokemons", pokemonsRouter);
 app.use("/api/extpokemons", pokemonsExternalRouter);
 
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
+});
+
 connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is runing on port ${PORT}`);
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`✅ Server running on port ${PORT}`);
   });
 });
