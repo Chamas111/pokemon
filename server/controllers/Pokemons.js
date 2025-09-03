@@ -14,8 +14,8 @@ const createPokemon = async (req, res, next) => {
 
 const getAllPokemon = async (req, res, next) => {
   const pokemons = await Pokemon.find({});
-  const page = parseInt(req.query.page);
-  const limit = parseInt(req.query.limit);
+  const page = parseInt(req.query.page) || 1; // default to page 1
+  const limit = parseInt(req.query.limit) || pokemons.length; // default to all items
 
   const startIndex = (page - 1) * limit;
   const lastIndex = page * limit;
@@ -25,15 +25,12 @@ const getAllPokemon = async (req, res, next) => {
   results.pageCount = Math.ceil(pokemons.length / limit);
 
   if (lastIndex < pokemons.length) {
-    results.next = {
-      page: page + 1,
-    };
+    results.next = { page: page + 1 };
   }
   if (startIndex > 0) {
-    results.prev = {
-      page: page - 1,
-    };
+    results.prev = { page: page - 1 };
   }
+
   results.result = pokemons.slice(startIndex, lastIndex);
   res.json(results);
 };
