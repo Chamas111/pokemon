@@ -1,0 +1,306 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.blue-bg {
+  background-color: #2a72b8;
+}
+
+.yellow-bg {
+  background-color: #ffcb05;
+}
+
+.darkblue-bg {
+  background-color: #153e65;
+}
+
+.lightgray-bg {
+  background-color: #e5e5e5;
+}
+
+.pokemon-card {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.type-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.type-pokemon {
+  border: 1px solid #2a72b8;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.header-card {
+  border-radius: 5px 5px 0 0;
+}
+
+.header-card h2 {
+  font-size: 1.2rem;
+  text-align: left;
+  padding: 0.75rem;
+}
+
+.body-card h4 {
+  text-align: left;
+  color: #2a72b8;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.color-blue {
+  color: #2a72b8;
+}
+
+.roboto {
+  font-family: 'Roboto';
+}
+
+.thumbnail {
+  max-width: 160px;
+  margin: 0rem 0 1rem;
+}
+
+.body-card p {
+  display: grid;
+}
+
+.body-card p span {
+  font-weight: 900;
+  text-align: left;
+  color: #2a72b8;
+  padding: 0rem 0.5rem 0rem 0rem;
+}
+
+.button-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 900;
+  color: #2a72b8;
+  font-size: 1.2rem;
+  text-decoration: none;
+  border-radius: 0 0 5px 5px;
+}
+
+.bottom-details {
+  height: 10px;
+  border-radius: 0 0 5px 5px;
+}
+
+.btn {
+  display: flex !important;
+  padding: 0.5rem 1rem;
+  align-items: center;
+}
+
+.btn-warning {
+  color: #2a72b8;
+}
+
+.buttons {
+  display: flex;
+}
+
+.logo-footer {
+  width: 230px;
+}
+
+#main-header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  text-transform: uppercase;
+  border-radius: 3px;
+  background-color: rgb(227, 223, 223);
+}
+
+#main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+#main-nav a {
+  color: #2a72b8;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: open sans;
+  display: inline-block;
+  margin-right: 20px;
+  text-transform: uppercase;
+}
+#main-nav a:hover {
+  color: #ffcb05;
+  transition: 0.5s;
+}
+
+#main-logo {
+  height: auto;
+  width: 150px;
+  object-fit: contain;
+  justify-self: start;
+  margin-left: 20px;
+}
+
+.list-unstyled {
+  justify-content: space-between;
+}
+
+@media (max-width: 952px) {
+  .main-header {
+    flex-direction: column;
+  }
+}
+
+#footer h4 { 
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+#footer .nav-item {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  text-decoration: none;
+  color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.search-bar {
+  display: grid;
+  grid-template-columns: 70% auto;
+}
+
+.search-start {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+}
+
+.search-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.input-group {
+  border: 2px solid white;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.form-control {
+  border-radius: 50px;
+  border: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.blue-color {
+  background-color: #2a72b8;
+  font-family: sans-serif;
+  color: white;
+  text-align: start;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 18px;
+}
+.blue1-color {
+  background-color: #2a72b8;
+  font-family: sans-serif;
+  color: white;
+  text-align: start;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 12px;
+}
+
+.yellow-color {
+  background-color: #ffcb05;
+  font-family: sans-serif;
+  color: #2a72b8;
+  text-align: start;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.gray-color {
+  background-color: rgb(223, 211, 211);
+  font-family: sans-serif;
+  color: #2a72b8;
+  text-align: start;
+  font-weight: 400;
+  font-size: 18px;
+}
+.form-textarea {
+  border-radius: 25px;
+  border: 1px solid #2a72b8;
+  padding: 10px;
+  height: 150px;
+}
+
+#addform-btn {
+  align-items: center;
+}
+
+/* css footer */
+#footer {
+  background-color: #153E65;
+  color: white;
+  text-align: left;
+}
+#footer .input-group > .form-control,
+.input-group > .form-floating,
+.input-group > .form-select {
+  height: calc(3.5rem + 2px);
+}
+#footer  svg {
+  color: rgb(255, 255, 255);
+}
+/* end css footer */
