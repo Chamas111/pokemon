@@ -1,7 +1,6 @@
 import React from "react";
 import PokemonsApiCards from "./PokemonsApiCards";
 
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import ReactPaginate from "react-paginate";
