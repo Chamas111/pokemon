@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../axiosInstance";
 import { useParams, navigate, useNavigate } from "react-router-dom";
 import PokemonApiDetails from "./PokemonApiDetails";
 function PokemonsApiCards() {
@@ -21,9 +21,7 @@ function PokemonsApiCards() {
   }, []);
   return (
     <>
-          <h1 className="color-blue roboto fs-2 m-3">
-            Pokemon API Resulsts
-          </h1>
+      <h1 className="color-blue roboto fs-2 m-3">Pokemon API Resulsts</h1>
       {loading ? (
         <h1>Loading...</h1>
       ) : (

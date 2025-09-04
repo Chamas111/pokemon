@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../axiosInstance";
 import moment from "moment";
 function PokemonDetails() {
   const { id } = useParams();

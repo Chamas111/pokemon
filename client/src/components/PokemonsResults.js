@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "../axiosInstance";
 import { useEffect, useState } from "react";
 import PokemonCards from "./PokemonCards";
 import { useRef } from "react";
