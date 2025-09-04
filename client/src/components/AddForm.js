@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import API_BASE_URL from "./config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -33,7 +34,7 @@ function AddForm() {
     e.preventDefault();
 
     axios
-      .post(`${process.env.REACT_APP_SERVER_BASE_URL}/api/pokemons`, {
+      .post(`${API_BASE_URL}/api/pokemons`, {
         name,
         abilities,
         description,
