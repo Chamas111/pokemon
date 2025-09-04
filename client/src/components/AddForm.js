@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import API_BASE_URL from "./config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -9,44 +8,41 @@ function AddForm() {
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [abilities, setAbilities] = useState([]);
-  const [weakness, setWeakness] = useState([]);
+  const [abilities, setAbilities] = useState("");
+  const [weakness, setWeakness] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
   const [gender, setGender] = useState("");
-  const [type, setType] = useState([]);
+  const [type, setType] = useState("");
 
-  const [error, setError] = useState({
-    name,
-    image,
-    abilities,
-    description,
-    weakness,
-    height,
-    weight,
+  const [errors, setErrors] = useState({}); // start empty object
 
-    gender,
-    type,
-  });
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post(`${API_BASE_URL}/api/pokemons`, {
+    try {
+      await axios.post(`${API_BASE_URL}/api/pokemons`, {
         name,
-        abilities,
         description,
-        weakness,
+        image,
         height,
         weight,
-        image,
         gender,
-        type,
-      })
-      .then((res) => navigate("/"))
-      .catch((e) => setError(e.response.data.errors));
+        // turn comma separated string into arrays:
+        abilities: abilities.split(",").map((a) => a.trim()),
+        weakness: weakness.split(",").map((w) => w.trim()),
+        type: type.split(",").map((t) => t.trim()),
+      });
+
+      navigate("/");
+    } catch (err) {
+      console.error(
+        "❌ Error creating Pokemon:",
+        err.response?.data || err.message
+      );
+      setErrors(err.response?.data?.errors || {});
+    }
   };
 
   return (
@@ -59,8 +55,8 @@ function AddForm() {
           <div className="col-12 col-md-6 col-lg-6 gray-color">
             <div className="mb-3 p-5">
               <label className="form-label">Name OF YOUR POKEMON</label>
-              {error.name && (
-                <p className="text-danger h6">{error.name.message}</p>
+              {errors.name && (
+                <p className="text-danger h6">{errors.name.message}</p>
               )}
               <input
                 type="text"
@@ -69,9 +65,10 @@ function AddForm() {
                 placeholder="Pokemon Name..."
                 onChange={(e) => setName(e.target.value)}
               />
-              <label class="form-label mt-3">IMAGE</label>
-              {error.image && (
-                <p className="text-danger h6">{error.image.message}</p>
+
+              <label className="form-label mt-3">IMAGE</label>
+              {errors.image && (
+                <p className="text-danger h6">{errors.image.message}</p>
               )}
               <input
                 type="text"
@@ -80,9 +77,10 @@ function AddForm() {
                 placeholder="Image Link..."
                 onChange={(e) => setImage(e.target.value)}
               />
-              <label class="form-label mt-3">DESCRIPTION</label>
-              {error.description && (
-                <p className="text-danger h6">{error.description.message}</p>
+
+              <label className="form-label mt-3">DESCRIPTION</label>
+              {errors.description && (
+                <p className="text-danger h6">{errors.description.message}</p>
               )}
               <textarea
                 value={description}
@@ -92,13 +90,15 @@ function AddForm() {
               ></textarea>
             </div>
           </div>
+
           <div className="col-12 col-md-6 col-lg-6 yellow-color">
+            {/* HEIGHT & WEIGHT */}
             <div className="row mt-5">
               <div className="col">
                 <div className="p-1 ms-5 me-5">
                   <label className="form-label">HEIGHT</label>
-                  {error.height && (
-                    <p className="text-danger h6">{error.height.message}</p>
+                  {errors.height && (
+                    <p className="text-danger h6">{errors.height.message}</p>
                   )}
                   <input
                     type="text"
@@ -112,8 +112,8 @@ function AddForm() {
               <div className="col">
                 <div className="p-1 ms-5 me-5">
                   <label className="form-label">WEIGHT</label>
-                  {error.weight && (
-                    <p className="text-danger h6">{error.weight.message}</p>
+                  {errors.weight && (
+                    <p className="text-danger h6">{errors.weight.message}</p>
                   )}
                   <input
                     type="text"
@@ -125,12 +125,16 @@ function AddForm() {
                 </div>
               </div>
             </div>
+
+            {/* ABILITIES & WEAKNESS */}
             <div className="row">
               <div className="col">
                 <div className="p-5">
-                  <label className="form-label">ABILITIES</label>
-                  {error.abilities && (
-                    <p className="text-danger h6">{error.abilities.message}</p>
+                  <label className="form-label">
+                    ABILITIES (comma separated)
+                  </label>
+                  {errors.abilities && (
+                    <p className="text-danger h6">{errors.abilities.message}</p>
                   )}
                   <input
                     type="text"
@@ -143,9 +147,11 @@ function AddForm() {
               </div>
               <div className="col">
                 <div className="p-5">
-                  <label className="form-label">WEAKNESS</label>
-                  {error.weakness && (
-                    <p className="text-danger h6">{error.weakness.message}</p>
+                  <label className="form-label">
+                    WEAKNESS (comma separated)
+                  </label>
+                  {errors.weakness && (
+                    <p className="text-danger h6">{errors.weakness.message}</p>
                   )}
                   <input
                     type="text"
@@ -157,38 +163,41 @@ function AddForm() {
                 </div>
               </div>
             </div>
+
+            {/* GENDER & TYPE */}
             <div className="row">
               <div className="col">
                 <div className="p-1 ms-5 me-5">
                   <label className="form-label">GENDER</label>
-                  {error.gender && (
-                    <p className="text-danger h6">{error.gender.message}</p>
+                  {errors.gender && (
+                    <p className="text-danger h6">{errors.gender.message}</p>
                   )}
                   <input
                     type="text"
                     value={gender}
                     className="form-control rounded-pill p-2 border border-primary"
-                    placeholder="type one or more"
+                    placeholder="male / female"
                     onChange={(e) => setGender(e.target.value)}
                   />
                 </div>
               </div>
               <div className="col">
                 <div className="p-1 ms-5 me-5">
-                  <label className="form-label">TYPE</label>
-                  {error.type && (
-                    <p className="text-danger">{error.type.message}</p>
+                  <label className="form-label">TYPE (comma separated)</label>
+                  {errors.type && (
+                    <p className="text-danger">{errors.type.message}</p>
                   )}
                   <input
                     type="text"
                     value={type}
                     className="form-control rounded-pill p-2 border border-primary"
-                    placeholder="type one or more"
+                    placeholder="fire, water..."
                     onChange={(e) => setType(e.target.value)}
                   />
                 </div>
               </div>
             </div>
+
             <div className="row mt-5 mb-4">
               <div className="col-5"></div>
               <div className="col-2">
@@ -206,7 +215,7 @@ function AddForm() {
         </div>
       </form>
       <div className="row">
-        <div class="col-sm-12 blue1-color mb-3"></div>
+        <div className="col-sm-12 blue1-color mb-3"></div>
       </div>
     </div>
   );
